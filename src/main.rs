@@ -2,6 +2,7 @@ use std::env;
 use std::path::Path;
 
 mod save;
+mod editor;
 
 fn main() -> Result<(), ()> {
     // Get the user's arguments
@@ -19,7 +20,7 @@ fn main() -> Result<(), ()> {
     // Create the path from the user's arguments
     let path: &Path = Path::new(&args[1]);
 
-    match save::save(path) {
+    match editor::editor(path) {
         Ok(_) => {
             println!("File {} successfully saved.", path.display());
         }

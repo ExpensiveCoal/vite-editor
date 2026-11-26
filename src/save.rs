@@ -16,31 +16,13 @@ pub fn save(path: &Path) -> Result<(), String> {
 
         )));
 
-    // Create the file if it doesn't exists
+    // Create file if it doesn't exists
     } else if !path.exists() {
 
         // Handle errors if the code can't create the file  
-        match File::create(path) {
-
-            Ok(_) => {
-                return Ok(());
-
-            }
-
-            Err(error) => {
-
-                return Err(String::from(format!(
-
-                    "Couldn't create file '{}', error message: {}",
-
-                    path.display(),
-
-                    error.to_string()
-
-                )));
-            }
-        }
-    } else {
-        return Err(String::from("Couldn't find, open or create file, try running code as root."));
+        File::create(path).map_err(|e| e.to_string())?;
+        
     }
+
+    Ok(())
 }
