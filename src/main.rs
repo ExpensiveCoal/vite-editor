@@ -4,22 +4,22 @@ use std::path::Path;
 mod save;
 mod editor;
 
-fn main() -> Result<(), ()> {
+fn main() -> Result<(), std::io::Error> {
     // Get the user's arguments
     let args: Vec<String> = env::args().collect();
 
-    // Check if arguments were provided
-    match args.get(1) {
-        Some(_) => {}
+    // Check if an argument was provided
+    let filename: &String = match args.get(1) {
+        Some(filename) => filename,
         None => {
             println!("Please select a file to edit.");
-            return Err(());
+            return Ok(());
         }
-    }
+    };
 
     // Create the path from the user's arguments
-    let path: &Path = Path::new(&args[1]);
-
+    let path: &Path = Path::new(filename);
+    
     match editor::editor(path) {
         Ok(_) => {
             println!("File {} successfully saved.", path.display());

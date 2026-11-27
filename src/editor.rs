@@ -3,20 +3,20 @@ use crossterm::{
     cursor::MoveTo, event::{self, Event, KeyCode, KeyModifiers}, execute, terminal::{Clear, ClearType, disable_raw_mode, enable_raw_mode},
 };
 
-pub fn editor(path: &Path) -> Result<(), String> {
+pub fn editor(path: &Path) -> Result<(), std::io::Error> {
     // Put the CLI in raw mode
-    enable_raw_mode().map_err(|e| e.to_string())?;
+    enable_raw_mode()?;
 
     // Clear the CLI
     execute!(
         std::io::stdout(),
         Clear(ClearType::All),
         MoveTo(0, 0)
-    ).map_err(|e| e.to_string())?;
+    )?;
 
     loop {
         // Run when user type a key
-        if let Event::Key(key) = event::read().map_err(|e| e.to_string())? {
+        if let Event::Key(key) = event::read()? {
             // Check if Ctrl key was press
             if key.modifiers.contains(KeyModifiers::CONTROL) {
                 // Check if key 'x' was press with Ctrl
@@ -38,7 +38,7 @@ pub fn editor(path: &Path) -> Result<(), String> {
     }
 
     // Restore normal terminal mode
-    disable_raw_mode().map_err(|e| e.to_string())?;
+    disable_raw_mode()?;
 
     Ok(())
 }

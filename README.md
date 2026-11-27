@@ -22,8 +22,4 @@ This project is still under construction and not fully functionnal yet.
 
 ## Liscence 
 
-VITE is FOSS ( Free and Open-Source Software ), licensed under the [GNU General Public License v3.0](LICENSE).
-
-## Copyright
-
-Copyright (C) 2026 ExpensiveCoal
+VITE is FOSS ( Free and Open-Source Software ), licensed under the [MIT liscence](LICENSE).
