@@ -21,9 +21,8 @@ fn main() -> Result<(), std::io::Error> {
     let path: &Path = Path::new(filename);
     
     match editor::editor(path) {
-        Ok(_) => {
-            println!("File {} successfully saved.", path.display());
-        }
+        Ok(_) => {}
+        
         Err(message) => {
             println!("{}", message);
         }

@@ -1,9 +1,10 @@
 use std::path::Path;
-use std::fs::File;
+use std::fs::{write, File};
 
-pub fn save(path: &Path) -> Result<(), std::io::Error> {
+pub fn save(path: &Path, text: String) -> Result<(), std::io::Error> {
     // Check if file exists and isn't a directory
     if path.is_file() {
+        write(path, text)?;
         return Ok(());
  
     } else if path.is_dir(){
